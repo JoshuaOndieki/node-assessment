@@ -8,7 +8,7 @@ const userRoutes= Router()
 userRoutes.post('', addUser)
 userRoutes.post('/signin', signinUser)
 userRoutes.patch('', resetPassword)
-userRoutes.get('/u/:name', verifyToken, searchUsersByName)
+userRoutes.get('/u', verifyToken, searchUsersByName)
 
 
 export default userRoutes
