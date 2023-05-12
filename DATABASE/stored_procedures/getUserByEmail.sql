@@ -4,5 +4,5 @@ CREATE OR ALTER PROCEDURE getUserByEmail(
 AS
 BEGIN
 
-SELECT * FROM users WHERE 
+SELECT * FROM users WHERE email=@email
 END
