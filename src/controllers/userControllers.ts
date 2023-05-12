@@ -28,19 +28,15 @@ const db = DatabaseHelper.getInstance()
 
 export const addUser = async (req:IaddUserRequest, res:Response)=>{
     try {
-        console.log('im here');
         const {error}= signupSchema.validate(req.body)
         if(error){ return res.status(404).json(error.details[0].message )}
-        console.log('im here 2');
         let id = uid()
         let {name, email, password} =req.body
         password = await bcrypt.hash(password,10)
 
         await db.exec('addUser', {id, name, email, password})
-        console.log('im here 3');
         const payload = {id, name, email}
         const token = jwt.sign(payload, process.env.SECRET_KEY as string, {expiresIn:"43200s"}) //valid for 5 days
-        console.log(token);
         
         return res.status(201).json({
             message:`User ${name} <${email}> has been registered successfully.`,
